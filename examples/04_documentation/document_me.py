@@ -8,6 +8,7 @@ Instructions:
   2. Type triple quotes: \"\"\"
   3. Let Copilot generate the docstring — press Tab to accept.
   4. Alternatively, select a function and ask Copilot Chat to document it.
+Run: python examples/04_documentation/document_me.py
 """
 
 import math
