@@ -75,12 +75,7 @@ git push origin main
 
 Open an issue using our submission form:
 
-👉 **[Submit for Voucher Giveaway](ISSUE_URL_PLACEHOLDER)** 👈
-
-<!-- 
-  ORGANIZER NOTE: Replace ISSUE_URL_PLACEHOLDER above with the actual URL.
-  Format: https://github.com/esola-thomas/UNC-SolHacks-2026/issues/new?template=voucher-submission.yml
--->
+👉 **[Submit for Voucher Giveaway](https://github.com/esola-thomas/UNC-SolHacks-2026/issues/new?template=voucher-submission.yaml)** 👈
 
 Fill out all required fields including:
 - Your name and UNC email

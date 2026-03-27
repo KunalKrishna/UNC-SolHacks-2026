@@ -10,6 +10,8 @@
 > Certification voucher** (AZ-900, AI-900, and more)! See
 > [VOUCHER_GIVEAWAY.md](VOUCHER_GIVEAWAY.md) for details — first come, first
 > served!
+>
+> 👉 **[Click here to submit for your voucher](https://github.com/esola-thomas/UNC-SolHacks-2026/issues/new?template=voucher-submission.yaml)** 👈
 
 ---
 
