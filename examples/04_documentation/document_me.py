@@ -8,12 +8,24 @@ Instructions:
   2. Type triple quotes: \"\"\"
   3. Let Copilot generate the docstring — press Tab to accept.
   4. Alternatively, select a function and ask Copilot Chat to document it.
+
+Run: python examples/04_documentation/document_me.py
 """
 
 import math
 
 
 def merge_sort(arr):
+    """
+    Sort an array using the merge sort algorithm.
+
+    Args:
+        arr (list): The list to be sorted.
+
+    Returns:
+        list: A new sorted list.
+    """
+
     if len(arr) <= 1:
         return arr
     mid = len(arr) // 2
@@ -23,6 +35,17 @@ def merge_sort(arr):
 
 
 def _merge(left, right):
+    """
+    Merge two sorted lists into one sorted list.
+
+    Args:
+        left (list): The left sorted list.
+        right (list): The right sorted list.
+
+    Returns:
+        list: A new sorted list containing all elements from both input lists.
+    """
+
     result = []
     i = j = 0
     while i < len(left) and j < len(right):
@@ -38,6 +61,15 @@ def _merge(left, right):
 
 
 def binary_search(arr, target):
+    """Perform binary search on a sorted array.
+
+    Args:
+        arr (list): The sorted list to search.
+        target: The value to search for.
+
+    Returns:
+        int: The index of the target value if found, otherwise -1.
+    """
     low, high = 0, len(arr) - 1
     while low <= high:
         mid = (low + high) // 2
@@ -51,6 +83,14 @@ def binary_search(arr, target):
 
 
 def is_prime(n):
+    """Check if a number is prime.
+
+    Args:
+        n (int): The number to check.
+
+    Returns:
+        bool: True if the number is prime, False otherwise.
+    """
     if n < 2:
         return False
     if n < 4:
@@ -66,6 +106,18 @@ def is_prime(n):
 
 
 def matrix_multiply(a, b):
+    """Multiply two matrices.
+
+    Args:
+        a (list of lists): The first matrix.
+        b (list of lists): The second matrix.
+
+    Returns:
+        list of lists: The product of the two matrices.
+
+    Raises:
+        ValueError: If the matrices have incompatible dimensions.
+    """
     if len(a[0]) != len(b):
         raise ValueError("Incompatible matrix dimensions")
     rows_a, cols_b = len(a), len(b[0])
@@ -79,6 +131,16 @@ def matrix_multiply(a, b):
 
 
 def caesar_cipher(text, shift, decrypt=False):
+    """Apply Caesar cipher to a string.
+
+    Args:
+        text (str): The string to encrypt or decrypt.
+        shift (int): The number of positions to shift each letter.
+        decrypt (bool): If True, decrypt the string; otherwise, encrypt it.
+
+    Returns:
+        str: The encrypted or decrypted string.
+    """
     if decrypt:
         shift = -shift
     result = []
@@ -93,12 +155,34 @@ def caesar_cipher(text, shift, decrypt=False):
 
 
 def calculate_distance(point1, point2):
+    """Calculate the Euclidean distance between two points.
+
+    Args:
+        point1 (tuple): The first point as a tuple of coordinates.
+        point2 (tuple): The second point as a tuple of coordinates.
+
+    Returns:
+        float: The Euclidean distance between the two points.
+
+    Raises:
+        ValueError: If the points have different numbers of dimensions.
+    """
     if len(point1) != len(point2):
         raise ValueError("Points must have the same number of dimensions")
     return math.sqrt(sum((a - b) ** 2 for a, b in zip(point1, point2)))
 
 
 def flatten_dict(d, parent_key="", separator="."):
+    """Flatten a nested dictionary.
+
+    Args:
+        d (dict): The dictionary to flatten.
+        parent_key (str): The parent key for nested keys.
+        separator (str): The separator for nested keys.
+
+    Returns:
+        dict: A flattened dictionary.
+    """
     items = []
     for k, v in d.items():
         new_key = f"{parent_key}{separator}{k}" if parent_key else k

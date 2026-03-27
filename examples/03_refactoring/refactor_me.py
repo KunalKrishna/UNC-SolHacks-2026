@@ -13,117 +13,87 @@ How to refactor:
   5. Run the self-checks to make sure nothing broke.
 
 Run: python examples/03_refactoring/refactor_me.py
+
 """
+
+from collections import Counter
 
 
 # --- MESSY FUNCTION 1: Grade calculator ---
 
 def g(s):
-    # calculates letter grade from numeric score
-    if s >= 90:
-        if s >= 97:
-            r = "A+"
-        elif s >= 93:
-            r = "A"
-        else:
-            r = "A-"
-    elif s >= 80:
-        if s >= 87:
-            r = "B+"
-        elif s >= 83:
-            r = "B"
-        else:
-            r = "B-"
-    elif s >= 70:
-        if s >= 77:
-            r = "C+"
-        elif s >= 73:
-            r = "C"
-        else:
-            r = "C-"
-    elif s >= 60:
-        r = "D"
-    else:
-        r = "F"
-    return r
+    """Calculate letter grade from numeric score."""
+    grades = [
+        (97, "A+"),
+        (93, "A"),
+        (90, "A-"),
+        (87, "B+"),
+        (83, "B"),
+        (80, "B-"),
+        (77, "C+"),
+        (73, "C"),
+        (70, "C-"),
+        (60, "D"),
+    ]
+    for threshold, grade in grades:
+        if s >= threshold:
+            return grade
+    return "F"
 
 
 # --- MESSY FUNCTION 2: Statistics ---
 
 def st(n):
-    # does some stats on a list of numbers
-    if len(n) == 0:
+    """Calculate statistics on a list of numbers."""
+    if not n:
         return None
-    s = 0
-    for i in range(len(n)):
-        s = s + n[i]
-    m = s / len(n)
-    n2 = []
-    for i in range(len(n)):
-        n2.append(n[i])
-    for i in range(len(n2)):
-        for j in range(i + 1, len(n2)):
-            if n2[i] > n2[j]:
-                t = n2[i]
-                n2[i] = n2[j]
-                n2[j] = t
-    if len(n2) % 2 == 0:
-        md = (n2[len(n2) // 2 - 1] + n2[len(n2) // 2]) / 2
+    
+    sorted_n = sorted(n)
+    mean = sum(n) / len(n)
+    
+    # Calculate median
+    mid = len(sorted_n) // 2
+    if len(sorted_n) % 2 == 0:
+        median = (sorted_n[mid - 1] + sorted_n[mid]) / 2
     else:
-        md = n2[len(n2) // 2]
-    mn = n2[0]
-    mx = n2[len(n2) - 1]
-    return {"mean": m, "median": md, "min": mn, "max": mx}
+        median = sorted_n[mid]
+    
+    return {
+        "mean": mean,
+        "median": median,
+        "min": min(n),
+        "max": max(n),
+    }
 
 
 # --- MESSY FUNCTION 3: FizzBuzz ---
 
 def fb(n):
-    # fizzbuzz but ugly
-    r = []
-    x = 1
-    while x <= n:
-        if x % 3 == 0 and x % 5 == 0:
-            r.append("FizzBuzz")
-        elif x % 3 == 0:
-            r.append("Fizz")
-        elif x % 5 == 0:
-            r.append("Buzz")
-        else:
-            r.append(str(x))
-        x = x + 1
-    return r
+    """Generate FizzBuzz sequence up to n."""
+    return [
+        "FizzBuzz" if i % 15 == 0
+        else "Fizz" if i % 3 == 0
+        else "Buzz" if i % 5 == 0
+        else str(i)
+        for i in range(1, n + 1)
+    ]
 
 
 # --- MESSY FUNCTION 4: Word frequency counter ---
 
 def wf(t):
-    # counts words
-    w = t.lower().split()
-    d = {}
-    for i in range(len(w)):
-        x = w[i]
-        # remove punctuation
-        x2 = ""
-        for c in x:
-            if c >= "a" and c <= "z":
-                x2 = x2 + c
-        if x2 != "":
-            if x2 in d:
-                d[x2] = d[x2] + 1
-            else:
-                d[x2] = 1
-    # sort by frequency
-    r = []
-    for k in d:
-        r.append((k, d[k]))
-    for i in range(len(r)):
-        for j in range(i + 1, len(r)):
-            if r[i][1] < r[j][1]:
-                t2 = r[i]
-                r[i] = r[j]
-                r[j] = t2
-    return r
+    """Count word frequencies in text, sorted by frequency (descending)."""
+    words = t.lower().split()
+    # Keep only lowercase letters (a-z)
+    cleaned = [
+        "".join(c for c in word if "a" <= c <= "z")
+        for word in words
+    ]
+    # Filter out empty strings
+    cleaned = [word for word in cleaned if word]
+    # Count and sort by frequency
+    counter = Counter(cleaned)
+    return sorted(counter.items(), key=lambda x: x[1], reverse=True)
 
 
 # ---------------------------------------------------------------------------

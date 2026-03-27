@@ -14,7 +14,7 @@ Run: python examples/05_debugging/buggy_code.py
 def sum_range(start: int, end: int) -> int:
     """Return the sum of all integers from start to end (inclusive)."""
     total = 0
-    for i in range(start, end):  # BUG: should include 'end'
+    for i in range(start, end + 1):  # BUG: should include 'end'
         total += i
     return total
 
@@ -26,7 +26,7 @@ def find_maximum(numbers: list[int]) -> int | None:
         return None
     max_val = numbers[0]
     for num in numbers[1:]:
-        if num < max_val:  # BUG: should be > not <
+        if num > max_val:  # BUG: should be > not <
             max_val = num
     return max_val
 
@@ -39,12 +39,13 @@ def count_even_numbers(numbers: list[int]) -> int:
         if num % 2 == 0:
             count += 1
     # BUG: forgot to return count
+    return count
 
 
 # BUG 4: Type error — mixing strings and integers
 def build_greeting(name: str, age: int) -> str:
     """Return a greeting string like 'Hello, Alice! You are 25 years old.'"""
-    greeting = "Hello, " + name + "! You are " + age + " years old."  # BUG: age is int, not str
+    greeting = "Hello, " + name + "! You are " + str(age) + " years old."  # BUG: age is int, not str
     return greeting
 
 
@@ -53,7 +54,7 @@ def filter_passing_grades(grades: list[int]) -> list[int]:
     """Return only grades that are 60 or above (passing)."""
     passing = []
     for grade in grades:
-        if grade < 60:  # BUG: should be >= 60
+        if grade >= 60:  # BUG: should be >= 60
             passing.append(grade)
     return passing
 

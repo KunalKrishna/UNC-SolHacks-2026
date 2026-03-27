@@ -20,14 +20,18 @@ Run this file to check your work:
 
 # TODO: Implement a function that converts Fahrenheit to Celsius
 # Formula: (fahrenheit - 32) * 5 / 9
-
+def fahrenheit_to_celsius(fahrenheit):
+    return (fahrenheit - 32) * 5 / 9
 
 # TODO: Implement a function that converts Celsius to Fahrenheit
 # Formula: celsius * 9 / 5 + 32
-
+def celsius_to_fahrenheit(celsius):
+    return celsius * 9 / 5 + 32
 
 # TODO: Implement a function that converts miles to kilometers
 # 1 mile = 1.60934 kilometers
+def miles_to_kilometers(miles):
+    return miles * 1.60934
 
 
 # ---------------------------------------------------------------------------
@@ -38,13 +42,25 @@ Run this file to check your work:
 # A palindrome reads the same forwards and backwards (e.g., "racecar")
 # Ignore case and spaces
 
+def is_palindrome(s):
+    # Remove non-alphanumeric characters and convert to lowercase
+    cleaned = ''.join(c.lower() for c in s if c.isalnum())
+    # Check if the cleaned string is equal to its reverse
+    return cleaned == cleaned[::-1]
+
 
 # TODO: Implement a function that counts the number of vowels in a string
 # Count both uppercase and lowercase vowels (a, e, i, o, u)
-
+def count_vowels(s):
+    vowels = 'aeiouAEIOU'
+    return sum(1 for char in s if char in vowels)   
 
 # TODO: Implement a function that reverses the words in a sentence
 # Example: "hello world" -> "world hello"
+
+def reverse_words(s):
+    words = s.split()
+    return ' '.join(reversed(words))
 
 
 # ---------------------------------------------------------------------------
@@ -54,11 +70,25 @@ Run this file to check your work:
 # TODO: Implement a function that finds the two numbers in a list that add up
 # to a target sum. Return them as a tuple. Return None if no pair is found.
 # Example: find_pair([1, 3, 5, 7], 8) -> (1, 7) or (3, 5)
-
+def find_pair(nums, target):
+    seen = set()
+    for num in nums:
+        complement = target - num
+        if complement in seen:
+            return (complement, num)
+        seen.add(num)
+    return None
 
 # TODO: Implement a function that flattens a nested list
 # Example: flatten([[1, 2], [3, [4, 5]]]) -> [1, 2, 3, 4, 5]
-
+def flatten(nested_list):
+    flat_list = []
+    for item in nested_list:
+        if isinstance(item, list):
+            flat_list.extend(flatten(item))  # Recursively flatten sublist
+        else:
+            flat_list.append(item)
+    return flat_list
 
 # ---------------------------------------------------------------------------
 # SELF-CHECKS — Run this file to verify your solutions
