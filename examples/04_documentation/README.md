@@ -32,5 +32,9 @@ Try these prompts in Copilot Chat:
 After adding docstrings, you can check them:
 
 ```bash
-python -c "import examples.04_documentation.document_me as m; help(m)"
+python .\examples\04_documentation\document_me.py
+```
+or
+```bash
+python examples/04_documentation/document_me.py 
 ```
